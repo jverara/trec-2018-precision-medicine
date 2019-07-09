@@ -33,13 +33,28 @@ def get_topics(topics_file):
         gene = t.find('gene').text
         demographic = t.find('demographic').text
         gene_list = gene.split(',')
-        gene1 = gene_list[0]
-        gene2 = ''
-        gene3 = ''
-        if (len(gene_list)>1):
-            gene2 = gene_list[1]
-        if (len(gene_list)>2):
-            gene3 = gene_list[2]
+
+        if 'fusion' in gene_list[0]:
+        	genes,fusion = gene_list[0].split(' ')
+        	genes = genes.split('-')
+        	gene1 = genes[0]
+        	gene2 = genes[1]
+        	gene3 = fusion
+        elif re.findall('\(+\)', gene_list[0])
+        	genes = gene_list[0].split (' ')
+        	gene1 = genes[0]
+        	gene2 = re.findall('\(([^)]+)\)')
+        	gene3 = 'variation'
+
+        else:
+
+	        gene1 = gene_list[0]
+	        gene2 = ''
+	        gene3 = ''
+	        if (len(gene_list)>1):
+	            gene2 = gene_list[1]
+	        if (len(gene_list)>2):
+	            gene3 = gene_list[2]
         if 'female' in demographic:
             sex = 'female'
         else:
@@ -56,8 +71,8 @@ def get_topics(topics_file):
                                 'age': age,
                                 'age_group': to_age_group(age)}
 
-    topics_df = pandas.DataFrame.from_dict(topics_dict, orient='index')
-    topics_df  = topics_df [['topic', 'disease', 'gene',
+	    topics_df = pandas.DataFrame.from_dict(topics_dict, orient='index')
+	    topics_df  = topics_df [['topic', 'disease', 'gene',
                              'gene1', 'gene2', 'gene3', 'sex', 'age', 'age_group']]
     return(topics_df)
 
