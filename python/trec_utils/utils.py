@@ -40,7 +40,7 @@ def get_topics(topics_file):
         	gene1 = genes[0]
         	gene2 = genes[1]
         	gene3 = fusion
-        elif re.findall('\(+\)', gene_list[0])
+        elif re.findall('\(+\)', gene_list[0]):
         	genes = gene_list[0].split (' ')
         	gene1 = genes[0]
         	gene2 = re.findall('\(([^)]+)\)')
